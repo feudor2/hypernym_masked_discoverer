@@ -250,7 +250,7 @@ class HypernymMaskedModel:
 
         def from_cohypo(cohypos):
             '''A function to predict new hypernyms for discovered co-hyponyms'''
-            to_hyper = [[wn_filter(self.probable_words(prepare_prompts(c[0], hyper_prompts)[i], k=k_hyper, article=article[0]),
+            to_hyper = [[wn_filter(self.probable_words(prepare_prompts(c[0], hyper_prompts, article=article[0])[i], k=k_hyper),
                                    word=c[0], mode='single', stopwords=stopwords)
                         for c in pr]
                         for i, pr in enumerate(cohypos)]
