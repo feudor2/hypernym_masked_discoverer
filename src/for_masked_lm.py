@@ -550,7 +550,7 @@ class ResultsWrapper:
         '''Load previously saved dataframes'''
         for cond in self.conditions:
             self.tables.append(pd.read_csv(os.path.join(path, f'{prefix}{cond}.tsv'), 
-                                           index_col=0, sep='\t').drop(self.col_in, axis=1))
+                                           index_col=0, sep='\t'))
     
     def results(self, sets_preds, model_name='Model', map_pref='', mrr_pref='', col1='gold', col2='pred', k=15):
         '''A function to build the dataframe and evaluate model performance'''
@@ -568,7 +568,7 @@ class ResultsWrapper:
     def get_results(self, tables, col_gold='gold'):
         '''Process tables in a `for` loop'''
         results = []
-        for col in self.tables[0].columns:
+        for col in self.tables[0].drop(self.col_in, axis=1).columns:
             results.append(
                 self.results(
                     {self.conditions[i]: tables[i] for i in range(len(self.conditions))},
@@ -581,5 +581,5 @@ class ResultsWrapper:
     
     def calculate_metrics(self, col_gold='gold'):
         '''A function to get evaluate predictions'''
-        tables = [self.assemble(self.dataset.reset_index(drop=True), t) for t in self.tables]
+        tables = [self.assemble(self.dataset, t.drop(self.col_in, axis=1)).reset_index(drop=True) for t in self.tables]
         return self.get_results(tables, col_gold) 
