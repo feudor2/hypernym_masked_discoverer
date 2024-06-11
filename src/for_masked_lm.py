@@ -365,8 +365,7 @@ class HypernymMaskedModel:
                 iter_ft_mixed = iterative(word, merge_lists(results_mixed, candidates_mixed), mixed_prompts, cohypo=cohypo_best, MAX=1.0)
             else:
                 results_ft_mixed, iter_ft_mixed = [], []
-                results_ft_cohypo, results_ft_cohypo_mixed = [], []
-                iter_ft_cohypo, iter_ft_cohypo_mixed = [], []
+                results_ft_cohypo_mixed, iter_ft_cohypo_mixed = [], []
 
             results_ft_hyper = merge_lists(candidates_hyper, results_hyper)
             #ft_cohypos = merge_lists(candidates_hypo, cohypos)
