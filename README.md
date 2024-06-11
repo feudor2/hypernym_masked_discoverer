@@ -1,6 +1,6 @@
 # A Masked LM Model for Hypernym Discovery
 ## Task description
-Hypernym Discovery is one of the most crucial natural languge processing task. It is in demand in automatic ontology learning and enrichment, query augmentation and to some extent in textual entailment and question answering.
+Hypernym discovery is one of the most crucial natural languge processing task. It is in demand in automatic ontology learning and enrichment, query augmentation and to some extent in textual entailment and question answering.
 
 Despite the fact that hyponym-hyperonym pairs occur in texts in special patterns like '<target> is a type of <hypernym>', for a certain word the corpus may not contain such a context at all. Another possible source of hypernymy knowledge are word2vec models. Those models learn vector representations of words based on surrounding context, so the words occurring in similar contexts have more similar vectors. A word can easily be replaced by its hypernyms, but not only hypernyms -- synonyms and other closely related words and associations can also infiltrate the closest candidates' list. Finally, like any other information that can be acquired from texts hypernymy may as well be revealed by transformer language models.
 
@@ -14,7 +14,7 @@ The model consists of the three main blocks:
 * filter + generator (_language model for mask-filling_)
   
 ### Generator: FastText
-The most appropriate vector generator for this task is FastText [2], because it is designed to operate with subwords: using subword embeddings it can readily get representation for a previously unseen word. I trained the FastText model (FT) with the `gensim` library on 20% of texts from the UMBC Webbase corpus [3] used in SemEval-2018.
+The most appropriate vector generator for this task is FastText [2], because it is designed to operate with subwords: using subword embeddings it can readily get representation for a previously unseen word. I trained the FastText model (FT) with the `gensim` library on 20% of texts from the UMBC Webbase corpus [3] used in SemEval-2018. The corpus is available at [CodaLab](https://competitions.codalab.org/competitions/17119#learn_the_details-terms_and_conditions).
 
 The picture below shows the training process (comparing CBOW and Skip-Gram algorithms). The output was filtered with nltk's WordNet corpus, and the rest of candidates were evaluated. Model performance was monitored via MAP@15 metric, and it reached its peak at the 10th text. The resulting score turned out to be higher than that of the largest model pretrained by the fasttext's authors (see `crawl-300d-2M-subword` at https://fasttext.cc/docs/en/english-vectors.html). The pretrained model predictions are included in the full dataset file.
 
