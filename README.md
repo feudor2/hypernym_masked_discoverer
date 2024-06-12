@@ -12,7 +12,9 @@ The model consists of the three main blocks:
 * initial generator (_word2vec_)
 * filter (_dictionary_)
 * filter + generator (_encoder language model for mask-filling_)
-  
+
+![alt text](pipeline.jpg)
+
 ### Generator: FastText
 The most appropriate vector generator for this task is FastText [2], because it is designed to operate with subwords: using subword embeddings it can readily get representation for a previously unseen word. I trained the FastText model (FT) with the `gensim` library on 20% of texts from the UMBC Webbase corpus [3] used in SemEval-2018. The corpus is available at [CodaLab](https://competitions.codalab.org/competitions/17119#learn_the_details-terms_and_conditions).
 
